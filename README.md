@@ -1,2 +1,3 @@
 # Twitter-Bot
-A Simple Twitter Bot built in Python
+A Simple Twitter Bot built in Python. This bot will Like, Retweet and randomly comment on certain hastags defined by the Administrator. This twitter bot will also have a whitelist and blacklist. Whitelist will be made of special users the bot will always Like, Retweet, Comment and Blacklist will be made of people who abuse the hashtags. The Bot Admin will have the option to add users to both Whitelist and blacklist.
+The future versions of this bot will have the ability to limit the Number of Interactions the bot has with Abusive users. The bot will automatically decrease the interactions with user it feels are abusing the hashtags and generate a Database file for The Bot Administrator to Blacklist them permanently.
