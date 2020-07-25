@@ -11,3 +11,20 @@ def getAPI(api_keys, access_tokens):
     api = tweepy.API(auth, wait_on_rate_limit=True)
     return api
 
+def userQueryTweetMax(need_query=False):
+    max_tweets, query = None, None
+    while True:
+        try:
+            max_tweets = int(input('Max tweets to find: '))
+            if max_tweets < 1:
+                print('Need a positive integer')
+                continue
+            if need_query:
+                query = input('Provide search query: ')
+            break
+        except ValueError:
+            print('Need a positive integer')
+    if query:
+        return max_tweets, query
+    else:
+        return max_tweets
