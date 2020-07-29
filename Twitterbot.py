@@ -28,3 +28,19 @@ def userQueryTweetMax(need_query=False):
         return max_tweets, query
     else:
         return max_tweets
+
+def userReqs():
+    reqs = {
+        'follows': -1,
+        'statuses': -1
+    }
+    for req in reqs.keys():
+        while True:
+            try:
+                reqs[req] = int(
+                    input(f'Requisite {req} for follow back (0 for none): '))
+                break
+            except ValueError:
+                print('Need an integer')
+    return reqs
+
