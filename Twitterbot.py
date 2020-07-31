@@ -1,4 +1,5 @@
 import tweepy
+import time
 
 
 def getAPI(api_keys, access_tokens):
@@ -10,6 +11,7 @@ def getAPI(api_keys, access_tokens):
         raise err
     api = tweepy.API(auth, wait_on_rate_limit=True)
     return api
+
 
 def userQueryTweetMax(need_query=False):
     max_tweets, query = None, None
@@ -28,6 +30,7 @@ def userQueryTweetMax(need_query=False):
         return max_tweets, query
     else:
         return max_tweets
+
 
 def userReqs():
     reqs = {
