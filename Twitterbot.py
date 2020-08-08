@@ -47,3 +47,14 @@ def userReqs():
                 print('Need an integer')
     return reqs
 
+
+def checkReqs(follower, reqs):
+    return follower.followers_count >= reqs['follows'] and follower.statuses_count >= reqs['statuses']
+
+
+def followBack(api):
+    reqs = userReqs()
+    for follower in tweepy.Cursor(api.followers).items():
+        if checkReqs(follower, reqs) and not follower.following:
+            follower.follow()
+            print(f'Followed {follower.name}')
