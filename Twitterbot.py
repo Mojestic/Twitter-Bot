@@ -2,6 +2,7 @@ import tweepy
 import time
 
 
+
 def getAPI(api_keys, access_tokens):
     try:
         auth = tweepy.OAuthHandler(api_keys[0], api_keys[1])
@@ -11,6 +12,7 @@ def getAPI(api_keys, access_tokens):
         raise err
     api = tweepy.API(auth, wait_on_rate_limit=True)
     return api
+
 
 
 def userQueryTweetMax(need_query=False):
@@ -32,6 +34,7 @@ def userQueryTweetMax(need_query=False):
         return max_tweets
 
 
+
 def userReqs():
     reqs = {
         'follows': -1,
@@ -48,8 +51,10 @@ def userReqs():
     return reqs
 
 
+
 def checkReqs(follower, reqs):
     return follower.followers_count >= reqs['follows'] and follower.statuses_count >= reqs['statuses']
+
 
 
 def followBack(api):
@@ -58,3 +63,22 @@ def followBack(api):
         if checkReqs(follower, reqs) and not follower.following:
             follower.follow()
             print(f'Followed {follower.name}')
+            
+
+def likeRetweet(api, user_lang="en"):
+    max_tweets, query = userQueryTweetMax(True)
+    for tweet in tweepy.Cursor(api.search, query, lang=user_lang).items(max_tweets):
+        try:
+            if not tweet.favorited:
+                tweet.favorite()
+            if not tweet.retweeted:
+                tweet.retweet()
+                print(
+                    f'Liked and retweeted "{tweet.text}" from {tweet.user.screen_name}')
+        except tweepy.TweepError as err:
+            print(
+                f'Tweet "{tweet.text}" not liked and retweeted: {err.reason}')
+        except StopIteration:
+            break
+        
+
