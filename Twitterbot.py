@@ -82,3 +82,9 @@ def likeRetweet(api, user_lang="en"):
             break
         
 
+def getFeed(api):
+    max_tweets = userQueryTweetMax(False)
+    user_feed = api.home_timeline(tweet_mode='extended', count=max_tweets)
+    for tweet in user_feed:
+        print(f'User {tweet.user.screen_name} tweeted:')
+        print(f'"{tweet.full_text}"\n')
